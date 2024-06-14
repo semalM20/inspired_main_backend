@@ -18,8 +18,8 @@ const payment = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "http://localhost:5900/api/success?amount=" + amount,
-        cancel_url: "http://localhost:5900/api/failed",
+        return_url: "https://inspired-studio-academy.onrender.com/api/success?amount=" + amount,
+        cancel_url: "https://inspired-studio-academy.onrender.com/api/failed",
       },
       transactions: [
         {
