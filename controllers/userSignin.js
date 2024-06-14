@@ -32,8 +32,11 @@ async function userSignInController(req, res) {
       });
 
       const tokenOption = {
-        httpOnly: true,
-        secure: true,
+        // httpOnly: true,
+        // secure: true,
+        path: "/", // Accessible to the entire site
+        secure: true, // Only sent over HTTPS
+        sameSite: "None",
       };
       res.cookie("token", token, tokenOption).status(200).json({
         message: "Login Successfully",
