@@ -32,7 +32,7 @@ router.get("/all-user", authToken, allUsers);
 router.post("/update-user", authToken, updateUser);
 
 router.post("/payment", payment);
-router.get("/success", paySuccess);
+// router.get("/success", paySuccess);
 router.get("/failed", payFailed);
 
 router.get("/userDetails/:userId", userDetailsController);
