@@ -4,12 +4,27 @@ async function updateUser(req, res) {
   try {
     const sessionUser = req.userId;
 
-    const { userId, email, name, role } = req.body;
+    const {
+      userId,
+      email,
+      name,
+      role,
+      onlineCoursePayment,
+      offlineBCoursePayment,
+      offlineMCoursePayment,
+    } = req.body;
 
     const payload = {
       ...(email && { email: email }),
       ...(name && { name: name }),
       ...(role && { role: role }),
+      ...(onlineCoursePayment && { onlineCoursePayment: onlineCoursePayment }),
+      ...(offlineBCoursePayment && {
+        offlineBCoursePayment: offlineBCoursePayment,
+      }),
+      ...(offlineMCoursePayment && {
+        offlineMCoursePayment: offlineMCoursePayment,
+      }),
     };
 
     const user = await userModel.findById(sessionUser);
