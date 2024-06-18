@@ -16,6 +16,8 @@ const resetPassword = require("../controllers/resetPassword");
 const payment = require("../controllers/paypal");
 const payFailed = require("../controllers/paypalError");
 const paySuccess = require("../controllers/paypalSuccess");
+const postReviewsController = require("../controllers/postReviews");
+const getReviewsController = require("../controllers/getReviews");
 
 router.post("/signup", userSignUpController);
 router.post("/login", userSignInController);
@@ -36,5 +38,8 @@ router.get("/success", paySuccess);
 router.get("/failed", payFailed);
 
 router.get("/userDetails/:userId", userDetailsController);
+
+router.post("/post-reviews", postReviewsController);
+router.get("/get-reviews", getReviewsController);
 
 module.exports = router;
