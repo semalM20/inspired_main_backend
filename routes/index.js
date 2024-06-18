@@ -21,7 +21,7 @@ const getReviewsController = require("../controllers/getReviews");
 
 router.post("/signup", userSignUpController);
 router.post("/login", userSignInController);
-router.get("/user-details", authToken, userDetailsController);
+router.get("/user-details", userDetailsController);
 router.get("/userLogout", userLogout);
 
 router.post("/book-slot", bookSlot);
