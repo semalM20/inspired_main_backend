@@ -4,7 +4,7 @@ async function userDetailsController(req, res) {
   console.log(req.query, "querrr------->");
   try {
     if (req.query.userId) {
-      const user = await userModel.findById(req.userId);
+      const user = await userModel.findById(req.query.userId);
 
       res.status(200).json({
         data: user,
