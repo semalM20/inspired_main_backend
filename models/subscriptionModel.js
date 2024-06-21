@@ -6,8 +6,11 @@ const subscribeSchema = new mongoose.Schema(
     payerID: String,
     paymentId: String,
     userName: String,
+    userEmail: String,
     subscriptionId: String,
     amount: Number,
+    paymentType: String,
+    expirySubDate: Date,
   },
   {
     timestamps: true,
