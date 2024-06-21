@@ -35,22 +35,37 @@ const paySuccess = async (req, res) => {
           const { paymentType, amount, userId } = JSON.parse(
             ParsedResponse.transactions[0].description
           );
-          console.log(paymentType, amount, "pay--->am", { [paymentType]: 1 });
+          console.log(paymentType, amount, "pay--->am", {
+            [paymentType]: 1,
+          });
           const updatedUser = await userModel.findByIdAndUpdate(userId, {
             [paymentType]: 1,
           });
           console.log(paymentType, "taking payment", updatedUser);
 
+          const createdDate = Date.now();
+
           const subscription = new subscribeModel({
             userId,
             userName: updatedUser.name,
+            userEmail: updatedUser.email,
             payerId: payerId,
             paymentId: paymentId,
             amount: amount,
+            paymentType: paymentType,
+            expirySubDate: createdDate,
           });
           subscription.save((error, sub) => {
             console.log(error, "error---->", sub);
           });
+
+          console.log("savedSubscription", subscription);
+          if (paymentType === "onlineCoursePayment") {
+            subscription.expirySubDate.setMonth(
+              subscription.expirySubDate.getMonth() + 3
+            );
+          }
+          console.log("expiryDate", subscription.expirySubDate);
 
           return res.redirect(`${process.env.fRONTEND_URL}/success`);
         }
