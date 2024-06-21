@@ -18,6 +18,7 @@ const payFailed = require("../controllers/paypalError");
 const paySuccess = require("../controllers/paypalSuccess");
 const postReviewsController = require("../controllers/postReviews");
 const getReviewsController = require("../controllers/getReviews");
+const allSubscriptions = require("../controllers/allSubsciptions");
 
 router.post("/signup", userSignUpController);
 router.post("/login", userSignInController);
@@ -41,5 +42,7 @@ router.get("/userDetails/:userId", userDetailsController);
 
 router.post("/post-reviews", postReviewsController);
 router.get("/get-reviews", getReviewsController);
+
+router.get("/all-subscription", authToken, allSubscriptions);
 
 module.exports = router;
