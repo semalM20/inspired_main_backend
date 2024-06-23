@@ -27,7 +27,7 @@ const checkAndExpireSubscriptions = async () => {
 
   try {
     const expiredSubscriptions = await subscribeModel.find({
-      expirySubDate: { $lte: now },
+      expirySubDate: { $lt: now },
       paymentType: "onlineCoursePayment",
     });
     console.log("expiredSubscriptions", expiredSubscriptions);
@@ -48,6 +48,11 @@ const checkAndExpireSubscriptions = async () => {
 cron.schedule("0 0 * * *", () => {
   console.log("Running subscription expiry check...");
   checkAndExpireSubscriptions();
+});
+
+// restart sever after every 5 minutes
+cron.schedule("*/5 * * * *", () => {
+  console.log("server restart after every 5 minutes...");
 });
 
 // Manual trigger endpoint
