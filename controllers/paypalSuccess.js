@@ -1,6 +1,7 @@
 const paypal = require("paypal-rest-sdk");
 const userModel = require("../models/userModel");
 const subscribeModel = require("../models/subscriptionModel");
+const slotBegModel = require("../models/OffBegSlotsModel");
 
 const paySuccess = async (req, res) => {
   try {
@@ -32,7 +33,7 @@ const paySuccess = async (req, res) => {
           const ParsedResponse = JSON.parse(response);
 
           console.log("taking pay", ParsedResponse.transactions[0].description);
-          const { paymentType, amount, userId } = JSON.parse(
+          const { paymentType, amount, userId, _slotId } = JSON.parse(
             ParsedResponse.transactions[0].description
           );
           console.log(paymentType, amount, "pay--->am", {
@@ -66,6 +67,21 @@ const paySuccess = async (req, res) => {
             );
           }
           console.log("expiryDate", subscription.expirySubDate);
+
+          console.log("slots--->id", _slotId, userId);
+
+          if (_slotId && paymentType === "offlineBCoursePayment") {
+            // slots for beg course
+            const s = await slotBegModel.find({ _id: _slotId });
+            console.log("s--->", s);
+
+            const updateS = await slotBegModel.findByIdAndUpdate(
+              { _id: _slotId },
+              { $push: { users: userId } }
+              // { $push: { users: { userId, userName: updatedUser.name } } }
+            );
+            console.log("updatedSlots", updateS);
+          }
 
           return res.redirect(`${process.env.fRONTEND_URL}/success`);
         }
