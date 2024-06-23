@@ -20,7 +20,7 @@ const postReviewsController = require("../controllers/postReviews");
 const getReviewsController = require("../controllers/getReviews");
 const allSubscriptions = require("../controllers/allSubsciptions");
 const getBeginnerCourseSlotsController = require("../controllers/getBeginnerCourseSlots");
-const postBeginnerCourseSlotsController = require("../controllers/beginnerCourseSlots");
+const postBeginnerCourseSlotsController = require("../controllers/BeginnerCourseSlots");
 
 router.post("/signup", userSignUpController);
 router.post("/login", userSignInController);
