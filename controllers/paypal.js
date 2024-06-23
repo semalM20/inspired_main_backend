@@ -1,8 +1,8 @@
 const paypal = require("paypal-rest-sdk");
 
 paypal.configure({
-  // mode: "sandbox",
-  mode: "live",
+  mode: "sandbox",
+  // mode: "live",
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET,
 });
@@ -12,6 +12,9 @@ const payment = async (req, res) => {
   const amount = req.body.amount;
   const userId = req.body.userId;
 
+  const _slotId = req.body.slotId;
+  console.log("slot id", _slotId);
+
   try {
     let create_payment_json = {
       intent: "sale",
@@ -19,8 +22,8 @@ const payment = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "https://inspired-studio-academy.onrender.com/api/success?amount=" + amount,
-        cancel_url: "https://inspired-studio-academy.onrender.com/api/failed",
+        return_url: "http://localhost:5900/api/success?amount=" + amount,
+        cancel_url: "http://localhost:5900/api/failed",
       },
       transactions: [
         {
@@ -43,6 +46,7 @@ const payment = async (req, res) => {
             paymentType,
             amount,
             userId,
+            _slotId,
           }),
         },
       ],
@@ -50,7 +54,7 @@ const payment = async (req, res) => {
 
     await paypal.payment.create(create_payment_json, function (error, payment) {
       if (error) {
-        console.log(error);
+        console.log("errrrrr", error);
         throw error;
       } else {
         console.log(payment);
