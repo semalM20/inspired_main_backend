@@ -19,6 +19,8 @@ const paySuccess = require("../controllers/paypalSuccess");
 const postReviewsController = require("../controllers/postReviews");
 const getReviewsController = require("../controllers/getReviews");
 const allSubscriptions = require("../controllers/allSubsciptions");
+const getBeginnerCourseSlotsController = require("../controllers/getBeginnerCourseSlots");
+const postBeginnerCourseSlotsController = require("../controllers/beginnerCourseSlots");
 
 router.post("/signup", userSignUpController);
 router.post("/login", userSignInController);
@@ -44,5 +46,11 @@ router.post("/post-reviews", postReviewsController);
 router.get("/get-reviews", getReviewsController);
 
 router.get("/all-subscription", authToken, allSubscriptions);
+router.get("/beginner-course-slots", getBeginnerCourseSlotsController);
+router.post(
+  "/add-beginner-course-slots",
+  authToken,
+  postBeginnerCourseSlotsController
+);
 
 module.exports = router;
