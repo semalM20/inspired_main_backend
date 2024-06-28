@@ -35,6 +35,10 @@ const deleteAddToCartProductController = require("../controllers/cart/deleteAddT
 const getCategoryWiseProduct = require("../controllers/products/getCategoryWiseProduct");
 //shop chechout
 const shopUserDetailsController = require("../controllers/shopCheckout/shopUserDetailsController");
+const shopPayment = require("../controllers/shopCheckout/shopPaypal");
+const shopPayFailed = require("../controllers/shopCheckout/shopPaypalError");
+const allShopUserDetails = require("../controllers/shopCheckout/allShopUserDetails");
+const shopPaySuccess = require("../controllers/shopCheckout/shopPaypalSuccess");
 
 router.post("/signup", userSignUpController);
 router.post("/login", userSignInController);
@@ -88,5 +92,9 @@ router.post("/delete-cart-product", deleteAddToCartProductController);
 
 //shop checkout
 router.post("/shop-user-details", shopUserDetailsController);
+router.get("/shop-user-buyers", allShopUserDetails);
+router.post("/shop-payment", shopPayment);
+router.get("/shop-success", shopPaySuccess);
+router.get("/shop-failed", shopPayFailed);
 
 module.exports = router;
