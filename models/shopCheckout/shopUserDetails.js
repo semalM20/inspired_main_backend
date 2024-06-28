@@ -54,6 +54,7 @@ const shopUserDetailsSchema = new mongoose.Schema(
       enum: ["pending", "paid", "failed"],
       default: "pending",
     },
+    amount: String,
   },
   {
     timestamps: true,
