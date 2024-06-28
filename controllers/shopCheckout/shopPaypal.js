@@ -20,8 +20,8 @@ const shopPayment = async (req, res) => {
       redirect_urls: {
         // return_url: "http://localhost:5900/api/success?amount=" + amount,
         // cancel_url: "http://localhost:5900/api/failed",
-        return_url: "http://localhost:5900/api/shop-success?amount=" + amount,
-        cancel_url: "http://localhost:5900/api/shop-failed?amount=" + amount,
+        return_url: "https://inspired-studio-academy.onrender.com/api/shop-success?amount=" + amount,
+        cancel_url: "https://inspired-studio-academy.onrender.com/api/shop-failed?amount=" + amount,
       },
       transactions: [
         {
